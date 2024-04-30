@@ -1,5 +1,6 @@
 import pandas as pd 
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn import preprocessing
@@ -29,7 +30,7 @@ X = imp.transform(X)
 
 
 # Linear model
-clf = LogisticRegression()
+clf = KNeighborsClassifier()
 yhat = cross_val_predict(clf, X, y, cv=5)
 
 acc = np.mean(yhat==y)
