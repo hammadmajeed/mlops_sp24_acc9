@@ -4,10 +4,10 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - env:
-            GH_TOKEN: ${{ github.token }}
       - uses: actions/checkout@v2
       - name: Running_updates
+      - env:
+            GH_TOKEN: ${{ github.token }}
         run: |
           pip install -r requirements.txt
           dvc repro
