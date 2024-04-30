@@ -25,7 +25,7 @@ X = preprocessing.scale(X) # Is standard
 # Impute NaNs
 
 imp = KNeighborsClassifier(n_neighbors=3)
-imp.fit(X)
+imp.fit(X, y)
 X = imp.transform(X)
 
 
