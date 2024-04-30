@@ -28,23 +28,23 @@ imp.fit(X)
 X = imp.transform(X)
 
 
-# Linear model
-clf = SVC()
-yhat = cross_val_predict(clf, X, y, cv=5)
+# Logistic Regression model
+clf_lr = LogisticRegression()
+yhat_lr = cross_val_predict(clf_lr, X, y, cv=5)
 
-acc = np.mean(yhat==y)
-tn, fp, fn, tp = confusion_matrix(y, yhat).ravel()
-specificity = tn / (tn+fp)
-sensitivity = tp / (tp + fn)
+acc_lr = np.mean(yhat_lr == y)
+tn_lr, fp_lr, fn_lr, tp_lr = confusion_matrix(y, yhat_lr).ravel()
+specificity_lr = tn_lr / (tn_lr + fp_lr)
+sensitivity_lr = tp_lr / (tp_lr + fn_lr)
+
 
 # Now print to file
-with open("metrics.json", 'w') as outfile:
-        json.dump({ "accuracy": acc, "specificity": specificity, "sensitivity":sensitivity}, outfile)
-
-# Let's visualize within several slices of the dataset
-score = yhat == y
-score_int = [int(s) for s in score]
-df['pred_accuracy'] = score_int
+with open("metrics_logistic_regression.json", 'w') as outfile:
+    json.dump({
+        "accuracy": acc_lr,
+        "specificity": specificity_lr,
+        "sensitivity": sensitivity_lr
+    }, outfile)
 
 # Bar plot by region
 
