@@ -6,12 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Running_updates
-      - env:
-            GH_TOKEN: ${{ github.token }}
         run: |
           pip install -r requirements.txt
           dvc repro
           git fetch --prune
           dvc metrics diff --md main > report.md
-          gh pr comment ${{github.event.pull_request.number}} -F report.md
+          gh pr comment ${{github.event.pull_request.number}} ${{ github.token }} -F report.md
           
