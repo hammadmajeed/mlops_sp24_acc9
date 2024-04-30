@@ -24,13 +24,13 @@ X = df.to_numpy()
 X = preprocessing.scale(X) # Is standard
 # Impute NaNs
 
-imp = SimpleImputer(missing_values=np.nan, strategy='mean')
+imp = KNeighborsClassifier(n_neighbors=3)
 imp.fit(X)
 X = imp.transform(X)
 
 
 # Linear model
-clf = KNeighborsClassifier()
+clf = KNeighborsClassifier(n_neighbors=3)
 yhat = cross_val_predict(clf, X, y, cv=5)
 
 acc = np.mean(yhat==y)
